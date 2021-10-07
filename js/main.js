@@ -42,12 +42,12 @@ const createOffer = () => {
 
   return {
     autor: {
-      avatar: 'img/avatars/user' + getRandomNumber(1,10) + '.png',
+      avatar: `img/avatars/user ${getRandomNumber(1,10)}.png`,
     },
 
     offer: {
-      title: 'Кексовое предложение для '+OFFER_TITLE[getRandomNumber(0,OFFER_TITLE.length-1)],
-      address: LAT + ',' + LNG,
+      title: `Кексовое предложение для ${OFFER_TITLE[getRandomNumber(0,OFFER_TITLE.length-1)]}`,
+      address: `${LAT},${LNG}`,
       price: getRandomNumber(1,9),
       type: OFFER_TYPE[getRandomNumber(0,OFFER_TYPE.length-1)],
       rooms: getRandomNumber(1,9),
@@ -55,7 +55,7 @@ const createOffer = () => {
       checkin: OFFER_CHECKIN[getRandomNumber(0,OFFER_CHECKIN.length-1)],
       checkout: OFFER_CHECKOUT[getRandomNumber(0,OFFER_CHECKOUT.length-1)],
       features: OFFER_FEATURES[getRandomNumber(0,OFFER_FEATURES.length-1)],
-      description: 'Этот объект недвижимости поражает '+OFFER_DES[getRandomNumber(0,OFFER_DES.length-1)]+'. Сделайте себя счастливыми.',
+      description: `Этот объект недвижимости поражает ${OFFER_DES[getRandomNumber(0,OFFER_DES.length-1)]}. Сделайте себя счастливыми.`,
       photos: OFFER_PHOTOS[getRandomNumber(0,OFFER_PHOTOS.length-1)],
     },
 
@@ -68,3 +68,5 @@ const createOffer = () => {
 };
 
 const OFFERS = Array.from({length: 10}, createOffer);
+
+document.innerHTML = OFFERS; // это для линтера
