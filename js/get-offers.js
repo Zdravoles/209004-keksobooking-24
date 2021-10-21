@@ -2,7 +2,7 @@ const getOfferMarkup = (aWhere, cardTemplate, OFFERS, aNumOfOffers) => {
   if (aNumOfOffers > OFFERS.length) {
     aNumOfOffers = OFFERS.length;
   }
-  for (let i = 1; i <= aNumOfOffers; i++) {
+  for (let ii = 1; ii <= aNumOfOffers; ii++) {
     const card = cardTemplate.cloneNode(true);
     card.querySelector('.popup__title').textContent = OFFERS[0].offer.title;
     card.querySelector('.popup__text--address').textContent = OFFERS[0].offer.address;
