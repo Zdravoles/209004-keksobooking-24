@@ -9,10 +9,17 @@ const OFFER_LNG_TO = 139.80000;
 const createOffer = () => {
   const LAT = getRandomNumber(OFFER_LAT_FROM,OFFER_LAT_TO);
   const LNG = getRandomNumber(OFFER_LNG_FROM,OFFER_LNG_TO);
+  let avatarNumber = getRandomNumber(1,10);
+  if (avatarNumber.toString().length === 1) {
+    avatarNumber = `img/avatars/user0${avatarNumber}.png`;
+  }
+  else {
+    avatarNumber = `img/avatars/user${avatarNumber}.png`;
+  }
 
   return {
     author: {
-      avatar: `img/avatars/user ${getRandomNumber(1,10)}.png`,
+      avatar: avatarNumber,
     },
 
     offer: {
@@ -26,7 +33,7 @@ const createOffer = () => {
       checkout: OFFER_TIMES[getRandomNumber(0,OFFER_TIMES.length-1)],
       features: OFFER_FEATURES.slice(getRandomNumber(0,OFFER_FEATURES.length-1)),
       description: `Этот объект недвижимости поражает ${OFFER_DES[getRandomNumber(0,OFFER_DES.length-1)]}. Сделайте себя счастливыми.`,
-      photos: OFFER_PHOTOS[getRandomNumber(0,OFFER_PHOTOS.length-1)],
+      photos: OFFER_PHOTOS.slice(getRandomNumber(0,OFFER_PHOTOS.length-1)),
     },
 
     location: {
