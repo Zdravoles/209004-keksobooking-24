@@ -1,6 +1,6 @@
 import {createOffer} from './create-offer.js';
 import {getOfferMarkup} from './get-offers.js';
-import {statusPageOn, statusPageOff} from './status-page.js';
+import {setStatusPageOn, setStatusPageOff} from './status-page.js';
 
 const OFFER_COUNT = 10;
 const OFFERS = Array.from({length: OFFER_COUNT}, createOffer);
@@ -8,5 +8,5 @@ const OFFERS = Array.from({length: OFFER_COUNT}, createOffer);
 const mapArea = document.querySelector('#map-canvas');
 const cardTemplate = document.querySelector('#card').content;
 getOfferMarkup(mapArea,cardTemplate,OFFERS,1);
-statusPageOff();
-statusPageOn();
+setStatusPageOff();
+setStatusPageOn();

@@ -1,10 +1,10 @@
-const statusPageOff = () => {
+const setStatusPageOff = () => {
   const formAd = document.querySelector('.ad-form');
   formAd.classList.add('ad-form--disabled');
 
   const fieldsets = formAd.querySelectorAll('fieldset');
   for (const element of fieldsets) {
-    element.disabled = 'disabled';
+    element.disabled = false;
   }
 
   const formFilters = document.querySelector('.map__filters');
@@ -12,17 +12,17 @@ const statusPageOff = () => {
 
   const filterElements = formFilters.children;
   for (const element of filterElements) {
-    element.disabled = 'disabled';
+    element.disabled = false;
   }
 };
 
-const statusPageOn = () => {
+const setStatusPageOn = () => {
   const formAd = document.querySelector('.ad-form');
   formAd.classList.remove('ad-form--disabled');
 
   const fieldsets = formAd.querySelectorAll('fieldset');
   for (const element of fieldsets) {
-    element.disabled = '';
+    element.disabled = true;
   }
 
   const formFilters = document.querySelector('.map__filters');
@@ -30,8 +30,8 @@ const statusPageOn = () => {
 
   const filterElements = formFilters.children;
   for (const element of filterElements) {
-    element.disabled = '';
+    element.disabled = true;
   }
 };
 
-export {statusPageOn, statusPageOff};
+export {setStatusPageOn, setStatusPageOff};
