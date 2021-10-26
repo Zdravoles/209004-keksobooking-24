@@ -4,7 +4,7 @@ const setStatusPageOff = () => {
 
   const fieldsets = formAd.querySelectorAll('fieldset');
   for (const element of fieldsets) {
-    element.disabled = false;
+    element.disabled = true;
   }
 
   const formFilters = document.querySelector('.map__filters');
@@ -12,7 +12,7 @@ const setStatusPageOff = () => {
 
   const filterElements = formFilters.children;
   for (const element of filterElements) {
-    element.disabled = false;
+    element.disabled = true;
   }
 };
 
@@ -22,7 +22,7 @@ const setStatusPageOn = () => {
 
   const fieldsets = formAd.querySelectorAll('fieldset');
   for (const element of fieldsets) {
-    element.disabled = true;
+    element.disabled = false;
   }
 
   const formFilters = document.querySelector('.map__filters');
@@ -30,7 +30,7 @@ const setStatusPageOn = () => {
 
   const filterElements = formFilters.children;
   for (const element of filterElements) {
-    element.disabled = true;
+    element.disabled = false;
   }
 };
 

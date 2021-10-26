@@ -1,6 +1,7 @@
 import {createOffer} from './create-offer.js';
 import {getOfferMarkup} from './get-offers.js';
 import {setStatusPageOn, setStatusPageOff} from './status-page.js';
+import './check-form.js';
 
 const OFFER_COUNT = 10;
 const OFFERS = Array.from({length: OFFER_COUNT}, createOffer);
