@@ -6,17 +6,7 @@ const CHECK_CAPACITY_ROOMS = [
   ['3 комнаты','для 1 гостя; для 2 гостей; для 3 гостей'],
   ['100 комнат','не для гостей'],
 ];
-
-const checkAdForm = () => {
-  const fieldTitle = document.querySelector('#title');
-  if (fieldTitle.value.length>100) {
-    fieldTitle.setCustomValidity('Максимальный размер 100 символов. Сократите, пожалуйста, название.');
-    fieldTitle.reportValidity();
-    return false;
-  }
-
-  return true;
-};
+const CHECK_NOROOMS_VALUE = '100';
 
 const checkCapacity = () => {
   for (const option of capacity.options) {
@@ -36,7 +26,7 @@ const checkCapacity = () => {
     }
   });
 
-  (roomNumber.value === '100') ? capacity.value = '0' : capacity.value = roomNumber.value;
+  (roomNumber.value === CHECK_NOROOMS_VALUE) ? capacity.value = '0' : capacity.value = roomNumber.value;
 
 };
 
@@ -45,5 +35,3 @@ roomNumber.addEventListener('change',() => {
 });
 
 checkCapacity();
-
-export {checkAdForm};
