@@ -6,7 +6,18 @@ const CHECK_CAPACITY_ROOMS = [
   ['3 комнаты','для 1 гостя; для 2 гостей; для 3 гостей'],
   ['100 комнат','не для гостей'],
 ];
+const CHECK_HOUSING_PRICE = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
 const CHECK_NOROOMS_VALUE = '100';
+const typeHousing = document.querySelector('#type');
+const priceNight = document.querySelector('#price');
+const timein = document.querySelector('#timein');
+const timeout = document.querySelector('#timeout');
 
 const checkCapacity = () => {
   for (const option of capacity.options) {
@@ -30,8 +41,34 @@ const checkCapacity = () => {
 
 };
 
+const checkPriceNight = (aHousingType) => {
+  for (const type in CHECK_HOUSING_PRICE) {
+    if (aHousingType===type) {
+      priceNight.placeholder = CHECK_HOUSING_PRICE[type];
+      priceNight.min = CHECK_HOUSING_PRICE[type];
+    }
+  }
+};
+
+const timeSync = (aTimeSelect) => {
+  (aTimeSelect==='timein') ? timeout.selectedIndex = timein.selectedIndex : timein.selectedIndex = timeout.selectedIndex;
+};
+
 roomNumber.addEventListener('change',() => {
   checkCapacity();
 });
 
+typeHousing.addEventListener('change',() => {
+  checkPriceNight(typeHousing.value);
+});
+
+timein.addEventListener('change',() => {
+  timeSync('timein');
+});
+
+timeout.addEventListener('change',() => {
+  timeSync('timeout');
+});
+
 checkCapacity();
+checkPriceNight(typeHousing.value);
