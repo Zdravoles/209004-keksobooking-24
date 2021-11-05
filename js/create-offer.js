@@ -1,14 +1,15 @@
-import {getRandomNumber} from './get-random-number.js';
+import {getRandomNumber, getRandomNumberFloat} from './get-random-number.js';
 import {OFFER_TYPE, OFFER_TIMES, OFFER_FEATURES, OFFER_PHOTOS, OFFER_TITLE, OFFER_DES} from './mock.js';
 
 const OFFER_LAT_FROM = 35.65000;
 const OFFER_LAT_TO = 35.70000;
 const OFFER_LNG_FROM = 139.70000;
 const OFFER_LNG_TO = 139.80000;
+const OFFER_FLOAT_COUNT = 5;
 
 const createOffer = () => {
-  const LAT = getRandomNumber(OFFER_LAT_FROM,OFFER_LAT_TO);
-  const LNG = getRandomNumber(OFFER_LNG_FROM,OFFER_LNG_TO);
+  const LAT = getRandomNumberFloat(OFFER_LAT_FROM,OFFER_LAT_TO,OFFER_FLOAT_COUNT);
+  const LNG = getRandomNumberFloat(OFFER_LNG_FROM,OFFER_LNG_TO,OFFER_FLOAT_COUNT);
   let avatarNumber = getRandomNumber(1,10);
   if (avatarNumber.toString().length === 1) {
     avatarNumber = `img/avatars/user0${avatarNumber}.png`;
