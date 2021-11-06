@@ -1,0 +1,75 @@
+import {getOfferMarkup} from './get-offers.js';
+
+const MAP_LAT = '35.689';
+const MAP_LNG = '139.692';
+const MAP_ZOOM = 8;
+const MAP_COORDS_COUNT = 5;
+const addressInputField = document.querySelector('#address');
+
+const map = L.map('map-canvas')
+  .setView(
+    [MAP_LAT, MAP_LNG], MAP_ZOOM,
+  );
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+).addTo(map);
+
+const mainPinIcon = L.icon({
+  iconUrl: './img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
+const normalPinIcon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+const mapMarker = L.marker(
+  {
+    lat: MAP_LAT,
+    lng: MAP_LNG,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
+
+mapMarker.addTo(map);
+
+const mapParserCoords = (aCoords) => `${aCoords.lat.toFixed(MAP_COORDS_COUNT)}, ${aCoords.lng.toFixed(MAP_COORDS_COUNT)}`;
+
+mapMarker.on('moveend', (evt) => {
+  addressInputField.value = mapParserCoords(evt.target.getLatLng());
+});
+
+const getMapInitCoords = () => {
+  addressInputField.value = `${MAP_LAT}, ${MAP_LNG}`;
+};
+
+const setMapPoints = (aOffers,aCardTemplate) => {
+  aOffers.forEach((value) => {
+    const lat = value.location.lat;
+    const lng = value.location.lng;
+    const point = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        draggable: false,
+        icon: normalPinIcon,
+      },
+    );
+    point
+      .addTo(map)
+      .bindPopup(getOfferMarkup(aCardTemplate,value));
+  });
+};
+
+export {map, getMapInitCoords, setMapPoints};

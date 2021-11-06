@@ -24,6 +24,7 @@ const setStatusPageOn = () => {
   for (const element of fieldsets) {
     element.disabled = false;
   }
+  document.querySelector('#address').readOnly = true;
 
   const formFilters = document.querySelector('.map__filters');
   formFilters.classList.remove('map__filters--disabled');
