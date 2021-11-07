@@ -1007,6 +1007,26 @@ fieldset {
   opacity: 0.6;
 }
 
+.error__message-area {
+  background-color: #cd9494;
+  width: 300px;
+  margin: auto;
+  padding: 50px 30px;
+  opacity: 0.8;
+  color: white;
+  border-radius: 3px;
+  position: relative;
+}
+
+.error__button-fetch {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  background: #cb4c4c;
+  font-size: 12px;
+}
+
 .visually-hidden {
   position: absolute;
 

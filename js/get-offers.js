@@ -32,7 +32,7 @@ const getOfferMarkup = (cardTemplate, OFFER) => {
 
   (OFFER.offer.checkin!=='' && OFFER.offer.checkout!=='') ? card.querySelector('.popup__text--time').textContent = `Заезд после ${OFFER.offer.checkin}, выезд до ${OFFER.offer.checkout}` : card.querySelector('.popup__text--time').remove();
 
-  if (OFFER.offer.features!=='') {
+  if (OFFER.offer.features && OFFER.offer.features!=='') {
     const listFeatures = card.querySelector('.popup__features').querySelectorAll('.popup__feature');
     listFeatures.forEach((featureElement) => {
       const isIdentity = OFFER.offer.features.some(
@@ -49,7 +49,7 @@ const getOfferMarkup = (cardTemplate, OFFER) => {
 
   (OFFER.offer.description!=='') ? card.querySelector('.popup__description').textContent = OFFER.offer.description : card.querySelector('.popup__description').remove();
 
-  if (OFFER.offer.photos!=='') {
+  if (OFFER.offer.photos && OFFER.offer.photos!=='') {
     for (let count = 0; count < OFFER.offer.photos.length; count++) {
       if (count===0) {
         card.querySelector('.popup__photo').src = OFFER.offer.photos[count];
