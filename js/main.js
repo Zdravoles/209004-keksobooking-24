@@ -1,10 +1,11 @@
+import {OFFER_COUNT} from './mock.js';
 import {dataSet} from './get-data.js';
 import {setStatusPageOn, setStatusPageOff} from './status-page.js';
 import './check-form.js';
 import {map, getMapInitCoords, setMapPoints, mapReset} from './map.js';
+import './filters.js';
 import {sendFormData} from './send-data.js';
 
-const OFFER_COUNT = 10;
 const cardTemplate = document.querySelector('#card').content;
 const form = document.querySelector('.ad-form');
 

@@ -8,5 +8,6 @@ const OFFER_PHOTOS = [
 ];
 const OFFER_TITLE = ['молодых котов', 'котов в расцвете лет', 'котих', 'кошек', 'котов с людьми'];
 const OFFER_DES = ['своим великолепием', 'своей ценой и качеством', 'своими размерами', 'воображение'];
+const OFFER_COUNT = 10;
 
-export {OFFER_TYPE, OFFER_TIMES, OFFER_FEATURES, OFFER_PHOTOS, OFFER_TITLE, OFFER_DES};
+export {OFFER_TYPE, OFFER_TIMES, OFFER_FEATURES, OFFER_PHOTOS, OFFER_TITLE, OFFER_DES, OFFER_COUNT};

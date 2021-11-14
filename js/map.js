@@ -30,6 +30,7 @@ const normalPinIcon = L.icon({
 });
 
 const mapUserLayer = L.layerGroup().addTo(map);
+const mapFilterLayer = L.layerGroup().addTo(map);
 
 const mapParserCoords = (aCoords) => `${aCoords.lat.toFixed(MAP_COORDS_COUNT)}, ${aCoords.lng.toFixed(MAP_COORDS_COUNT)}`;
 
@@ -73,13 +74,14 @@ const setMapPoints = (aOffers,aCardTemplate) => {
       },
     );
     point
-      .addTo(map)
+      .addTo(mapFilterLayer)
       .bindPopup(getOfferMarkup(aCardTemplate,value));
   });
 };
 
 const mapReset = () => {
   mapUserLayer.clearLayers();
+  mapFilterLayer.clearLayers();
   createUserMarker();
   getMapInitCoords();
 };
