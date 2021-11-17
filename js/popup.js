@@ -28,12 +28,12 @@ const getOpenPopup = () => {
   return false;
 };
 
-const onPopupEscKeydown = (evt) => {
+function onPopupEscKeydown(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     hidePopup();
   }
-};
+}
 
 function hidePopup() {
   if (getOpenPopup()) {
