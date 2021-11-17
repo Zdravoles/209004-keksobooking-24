@@ -28,18 +28,18 @@ const getOpenPopup = () => {
   return false;
 };
 
-function onPopupEscKeydown(evt) {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    hidePopup();
-  }
-}
-
 function hidePopup() {
   if (getOpenPopup()) {
     const messageArea = getOpenPopup();
     messageArea.classList.add(HIDE_CLASS);
     document.removeEventListener('keydown', onPopupEscKeydown);
+  }
+}
+
+function onPopupEscKeydown(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    hidePopup();
   }
 }
 
