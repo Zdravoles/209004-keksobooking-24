@@ -1,35 +1,35 @@
 const setStatusPageOff = () => {
-  const formAd = document.querySelector('.ad-form');
-  formAd.classList.add('ad-form--disabled');
+  const formAdNode = document.querySelector('.ad-form');
+  formAdNode.classList.add('ad-form--disabled');
 
-  const fieldsets = formAd.querySelectorAll('fieldset');
+  const fieldsets = formAdNode.querySelectorAll('fieldset');
   for (const element of fieldsets) {
     element.disabled = true;
   }
 
-  const formFilters = document.querySelector('.map__filters');
-  formFilters.classList.add('map__filters--disabled');
+  const formFiltersNode = document.querySelector('.map__filters');
+  formFiltersNode.classList.add('map__filters--disabled');
 
-  const filterElements = formFilters.children;
+  const filterElements = formFiltersNode.children;
   for (const element of filterElements) {
     element.disabled = true;
   }
 };
 
 const setStatusPageOn = () => {
-  const formAd = document.querySelector('.ad-form');
-  formAd.classList.remove('ad-form--disabled');
+  const formAdNode = document.querySelector('.ad-form');
+  formAdNode.classList.remove('ad-form--disabled');
 
-  const fieldsets = formAd.querySelectorAll('fieldset');
+  const fieldsets = formAdNode.querySelectorAll('fieldset');
   for (const element of fieldsets) {
     element.disabled = false;
   }
   document.querySelector('#address').readOnly = true;
 
-  const formFilters = document.querySelector('.map__filters');
-  formFilters.classList.remove('map__filters--disabled');
+  const formFiltersNode = document.querySelector('.map__filters');
+  formFiltersNode.classList.remove('map__filters--disabled');
 
-  const filterElements = formFilters.children;
+  const filterElements = formFiltersNode.children;
   for (const element of filterElements) {
     element.disabled = false;
   }

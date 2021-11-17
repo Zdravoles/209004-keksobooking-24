@@ -1,6 +1,6 @@
 import {dataSet} from './get-data.js';
 import {OFFER_COUNT} from './mock.js';
-import {setMapPoints, mapReset} from './map.js';
+import {setMapPoints, mapClearFiltersLayer} from './map.js';
 import {debounce} from './utils/debounce.js';
 
 const FILTER_PRICE_MIN = 0;
@@ -11,42 +11,42 @@ const FILTER_PREF_ANY = 'any';
 const RERENDER_DELAY = 500;
 const RANK_MAX = 4;
 
-const cardTemplate = document.querySelector('#card').content;
-const filterHousingType = document.querySelector('#housing-type');
-const filterHousingPrice = document.querySelector('#housing-price');
-const filterHousingRooms = document.querySelector('#housing-rooms');
-const filterHousingGuests = document.querySelector('#housing-guests');
-const filterHousingFeatures = document.querySelector('#housing-features');
+const cardTemplateNode = document.querySelector('#card').content;
+const filterHousingTypeNode = document.querySelector('#housing-type');
+const filterHousingPriceNode = document.querySelector('#housing-price');
+const filterHousingRoomsNode = document.querySelector('#housing-rooms');
+const filterHousingGuestsNode = document.querySelector('#housing-guests');
+const filterHousingFeaturesNode = document.querySelector('#housing-features');
 
 const compareOffers = (offerA, offerB) => offerB.offer.rank - offerA.offer.rank;
 
 const setFiltersPoints = (offers) => {
-  const offerType = filterHousingType.options[filterHousingType.selectedIndex].value;
-  const offerPrice = filterHousingPrice.options[filterHousingPrice.selectedIndex].value;
-  const offerRoom = filterHousingRooms.options[filterHousingRooms.selectedIndex].value;
-  const offerGuests = filterHousingGuests.options[filterHousingGuests.selectedIndex].value;
-  const offerFeatures = filterHousingFeatures.querySelectorAll('input');
+  const offerType = filterHousingTypeNode.options[filterHousingTypeNode.selectedIndex].value;
+  const offerPriceNode = filterHousingPriceNode.options[filterHousingPriceNode.selectedIndex].value;
+  const offerRoom = filterHousingRoomsNode.options[filterHousingRoomsNode.selectedIndex].value;
+  const offerGuests = filterHousingGuestsNode.options[filterHousingGuestsNode.selectedIndex].value;
+  const offerFeaturesNode = filterHousingFeaturesNode.querySelectorAll('input');
   const selectedOffers = [];
 
   let priceMin = FILTER_PRICE_MIN;
   let priceMax = FILTER_PRICE_MAX;
   let countRooms = offerRoom;
-  mapReset();
+  mapClearFiltersLayer();
 
-  if (offerPrice === 'low') {
+  if (offerPriceNode === 'low') {
     priceMax = FILTER_PRICE_MAX_LOW;
   }
-  if (offerPrice === 'middle') {
+  if (offerPriceNode === 'middle') {
     priceMin = FILTER_PRICE_MAX_LOW;
     priceMax = FILTER_PRICE_MAX_MIDDLE;
   }
-  if (offerPrice === 'high') {
+  if (offerPriceNode === 'high') {
     priceMin = FILTER_PRICE_MAX_MIDDLE;
   }
 
   const filteredOffers = offers.filter((offer) => {
     if (offer.offer.features) {
-      for (const feature of offerFeatures) {
+      for (const feature of offerFeaturesNode) {
         if (feature.checked) {
           if (offer.offer.features.includes(feature.value)) {
             return true;
@@ -92,33 +92,33 @@ const setFiltersPoints = (offers) => {
 
   selectedOffers.sort(compareOffers);
 
-  setMapPoints(selectedOffers,cardTemplate);
+  setMapPoints(selectedOffers,cardTemplateNode);
 };
 
 dataSet.then((data) => {
   const ALL_OFFERS = data;
 
-  filterHousingType.addEventListener('change', debounce(
+  filterHousingTypeNode.addEventListener('change', debounce(
     () => setFiltersPoints(ALL_OFFERS),
     RERENDER_DELAY,
   ));
 
-  filterHousingPrice.addEventListener('change', debounce(
+  filterHousingPriceNode.addEventListener('change', debounce(
     () => setFiltersPoints(ALL_OFFERS),
     RERENDER_DELAY,
   ));
 
-  filterHousingRooms.addEventListener('change', debounce(
+  filterHousingRoomsNode.addEventListener('change', debounce(
     () => setFiltersPoints(ALL_OFFERS),
     RERENDER_DELAY,
   ));
 
-  filterHousingGuests.addEventListener('change', debounce(
+  filterHousingGuestsNode.addEventListener('change', debounce(
     () => setFiltersPoints(ALL_OFFERS),
     RERENDER_DELAY,
   ));
 
-  filterHousingFeatures.addEventListener('click', debounce(
+  filterHousingFeaturesNode.addEventListener('click', debounce(
     (evt) => {
       if (evt.target.nodeName === 'INPUT') {
         setFiltersPoints(ALL_OFFERS);

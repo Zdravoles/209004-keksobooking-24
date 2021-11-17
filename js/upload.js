@@ -1,23 +1,23 @@
 const IMAGE_FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-const selectAvatar = document.querySelector('#avatar');
-const previewAvatar = document.querySelector('.ad-form-header__preview img');
-const selectPhoto = document.querySelector('#images');
+const selectAvatarNode = document.querySelector('#avatar');
+const previewAvatarNode = document.querySelector('.ad-form-header__preview img');
+const selectPhotoNode = document.querySelector('#images');
 const previewPhotoArea = document.querySelector('.ad-form__photo');
 
-selectAvatar.addEventListener('change', () => {
-  const selectFile = selectAvatar.files[0];
+selectAvatarNode.addEventListener('change', () => {
+  const selectFile = selectAvatarNode.files[0];
   const selectFileName = selectFile.name.toLowerCase();
 
   const isCheckTypes = IMAGE_FILE_TYPES.some((type) => selectFileName.endsWith(type));
 
   if (isCheckTypes) {
-    previewAvatar.src = URL.createObjectURL(selectFile);
+    previewAvatarNode.src = URL.createObjectURL(selectFile);
   }
 });
 
-selectPhoto.addEventListener('change', () => {
-  const selectFile = selectPhoto.files[0];
+selectPhotoNode.addEventListener('change', () => {
+  const selectFile = selectPhotoNode.files[0];
   const selectFileName = selectFile.name.toLowerCase();
 
   const isCheckTypes = IMAGE_FILE_TYPES.some((type) => selectFileName.endsWith(type));

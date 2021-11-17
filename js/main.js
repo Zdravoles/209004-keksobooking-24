@@ -1,4 +1,4 @@
-import {OFFER_COUNT} from './mock.js';
+import {OFFER_COUNT, DEFAULT_AVATAR} from './mock.js';
 import {dataSet} from './get-data.js';
 import {setStatusPageOn, setStatusPageOff} from './status-page.js';
 import './check-form.js';
@@ -7,8 +7,9 @@ import './filters.js';
 import './upload.js';
 import {sendFormData} from './send-data.js';
 
-const cardTemplate = document.querySelector('#card').content;
-const form = document.querySelector('.ad-form');
+const cardTemplateNode = document.querySelector('#card').content;
+const formNode = document.querySelector('.ad-form');
+const filtersAreaNode = document.querySelector('.map__filters');
 
 setStatusPageOff();
 if (map.on('load')) {
@@ -16,30 +17,39 @@ if (map.on('load')) {
   getMapInitCoords();
   dataSet.then((data) => {
     const OFFERS = data.slice(0,OFFER_COUNT);
-    setMapPoints(OFFERS,cardTemplate);
+    setMapPoints(OFFERS,cardTemplateNode);
   });
   dataSet.catch((error) => {
-    const message = document.querySelector('#error-fetch').content.cloneNode(true);
-    message.querySelector('.error-text').textContent = error;
-    document.body.appendChild(message);
+    const messageNode = document.querySelector('#error-fetch').content.cloneNode(true);
+    messageNode.querySelector('.error-text').textContent = error;
+    document.body.appendChild(messageNode);
 
-    const btnClose = document.querySelector('.error__button-fetch');
-    btnClose.addEventListener('click', () => {
-      const messageArea = document.querySelector('.error-fetch');
-      messageArea.classList.add('visually-hidden');
+    const btnCloseNode = document.querySelector('.error__button-fetch');
+    btnCloseNode.addEventListener('click', () => {
+      const messageAreaNode = document.querySelector('.error-fetch');
+      messageAreaNode.classList.add('visually-hidden');
     });
   });
 }
 
-form.addEventListener('submit', (evt) => {
+formNode.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  sendFormData(form);
-  form.reset();
-  mapReset();
+  sendFormData(formNode);
 });
 
-form.addEventListener('reset', () => {
+formNode.addEventListener('reset', () => {
   mapReset();
-  const addressInputField = document.querySelector('#address');
-  addressInputField.placeholder = addressInputField.value;
+  filtersAreaNode.reset();
+  dataSet.then((data) => {
+    const OFFERS = data.slice(0,OFFER_COUNT);
+    setMapPoints(OFFERS,cardTemplateNode);
+  });
+  const addressInputFieldNode = document.querySelector('#address');
+  addressInputFieldNode.placeholder = addressInputFieldNode.value;
+  if (document.querySelector('.ad-form-header__preview img')) {
+    document.querySelector('.ad-form-header__preview img').src = DEFAULT_AVATAR;
+  }
+  if (document.querySelector('.ad-form__photo img')) {
+    document.querySelector('.ad-form__photo img').remove();
+  }
 });

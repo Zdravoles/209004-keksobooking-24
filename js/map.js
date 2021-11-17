@@ -4,7 +4,7 @@ const MAP_LAT = '35.689';
 const MAP_LNG = '139.692';
 const MAP_ZOOM = 12;
 const MAP_COORDS_COUNT = 5;
-const addressInputField = document.querySelector('#address');
+const addressInputFieldNode = document.querySelector('#address');
 
 const map = L.map('map-canvas')
   .setView(
@@ -49,14 +49,14 @@ const createUserMarker = () => {
   mapMarker.addTo(mapUserLayer);
 
   mapMarker.on('moveend', (evt) => {
-    addressInputField.value = mapParserCoords(evt.target.getLatLng());
+    addressInputFieldNode.value = mapParserCoords(evt.target.getLatLng());
   });
 };
 
 createUserMarker();
 
 const getMapInitCoords = () => {
-  addressInputField.value = `${MAP_LAT}, ${MAP_LNG}`;
+  addressInputFieldNode.value = `${MAP_LAT}, ${MAP_LNG}`;
 };
 
 const setMapPoints = (aOffers,aCardTemplate) => {
@@ -79,11 +79,13 @@ const setMapPoints = (aOffers,aCardTemplate) => {
   });
 };
 
+const mapClearFiltersLayer = () => mapFilterLayer.clearLayers();
+
 const mapReset = () => {
   mapUserLayer.clearLayers();
-  mapFilterLayer.clearLayers();
+  mapClearFiltersLayer();
   createUserMarker();
   getMapInitCoords();
 };
 
-export {map, getMapInitCoords, setMapPoints, mapReset};
+export {map, getMapInitCoords, setMapPoints, mapReset, mapClearFiltersLayer};
