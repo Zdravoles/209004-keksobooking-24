@@ -28,18 +28,17 @@ const getOpenPopup = () => {
   return false;
 };
 
-const onPopupEscKeydown = (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    hidePopup();
-  }
-};
-
 function hidePopup() {
   if (getOpenPopup()) {
     const messageArea = getOpenPopup();
     messageArea.classList.add(HIDE_CLASS);
-    document.removeEventListener('keydown', onPopupEscKeydown);
+  }
+}
+
+function onPopupEscKeydown(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    hidePopup();
   }
 }
 
@@ -53,7 +52,7 @@ const showPopup = (messageType, messageContent) => {
       messageArea.classList.add('visually-hidden');
     });
   }
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', onPopupEscKeydown, {once: true});
   messageArea.addEventListener('click', hidePopup);
 };
 
